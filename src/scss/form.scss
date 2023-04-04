@@ -1,0 +1,170 @@
+.form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0; // Скрываем фон и сам попап
+    pointer-events: none; // Запрещаем ему быть целью событий
+    transition: 0.5s all;
+}
+
+.form.active {
+    // При добавлении класса 'active'
+    opacity: 1; // Показываем фон и попап
+    pointer-events: all; // Возвращаем события
+    display: block;
+    transition: 0.5s all;
+}
+
+.add-task {
+    background-color: #e7d2f7;
+    border-radius: 8px;
+    width: 800px;
+    overflow: hidden;
+    padding: 20px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); // Центрируем и масштабируем в 0 само окно
+    background: #fff;
+    width: 400px;
+    padding: 25px;
+    transition: 0.5s all;
+}
+
+.add-task.active {
+    // При добавлении класса 'active'
+    transform: translate(-50%, -50%) scale(1); // Так же центрируем и плавно увеличиваем
+    transition: 0.5s all;
+}
+
+.form-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.form-head::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: hsl(35, 88%, 53%);
+    display: block;
+    margin: 10px auto 10px;
+}
+
+.form-head-title {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: hsl(35, 88%, 53%);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.fa-circle-xmark {
+    font-size: 24px;
+    color: hsl(35, 88%, 53%);
+    cursor: pointer;
+}
+
+.add-task-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-task-text {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-family: 'Open Sans';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: hsl(253, 32%, 41%);
+    text-align: left;
+    margin-bottom: 20px;
+
+}
+
+textarea {
+
+    border: 2px solid hsl(253, 32%, 41%);
+    border-radius: 15px;
+    outline: none;
+    resize: none;
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    padding: 8px;
+}
+
+#task_autor,
+#title_text {
+    border: 2px solid hsl(253, 32%, 41%);
+    border-radius: 8px;
+    width: 100%;
+    font-size: 20px;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+
+
+.form-buttons {
+    display: flex;
+    justify-content: end;
+}
+
+.form-create {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 40px;
+    text-transform: capitalize;
+    color: #FFF;
+    background-color: hsl(35, 88%, 53%);
+    border: 1px solid hsl(35, 88%, 53%);
+    border-radius: 25px;
+    text-align: center;
+    width: 140px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-right: 10px;
+}
+
+.form-cancel {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 40px;
+    text-transform: capitalize;
+    color: #FFF;
+    background-color: hsl(253, 32%, 41%);
+    border: 1px solid hsl(253, 32%, 41%);
+    border-radius: 25px;
+    text-align: center;
+    width: 140px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-right: 10px;
+}
+
+.form-create:hover {
+    background-color: #fff;
+    color: hsl(35, 88%, 53%);
+}
+
+.form-cancel:hover {
+    background-color: #fff;
+    color: hsl(253, 32%, 41%);
+}

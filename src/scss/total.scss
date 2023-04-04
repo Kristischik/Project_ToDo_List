@@ -1,0 +1,40 @@
+.total {
+    padding: 5px 0;
+}
+
+.total-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -15px;
+}
+
+.total-make, .total-progress, .total-done{
+    width: 30%;
+    margin: auto;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between ;
+    margin: 0 15px;
+}
+.total-title {
+    font-family: 'Open Sans';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+    color: hsl(253, 32%, 41%);
+    
+}
+.total-count {
+    font-family: 'Open Sans';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+    color: hsl(35, 88%, 53%);
+}

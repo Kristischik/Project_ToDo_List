@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./scss/index.scss">
+    <title>ToDo</title>
+</head>
+
+<body>
+
+    <section class="main">
+        <div class="container">
+            <div class="main-wrap">
+                <span class="main-logo">ToDo</span>
+                <h1 class="main-title">What can I Do Today</h1>
+                <div class="main-date"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="task">
+        <div class="container">
+            <div class="task-wrap">
+                <div class="task-make">
+                    <h2 class="task-title">Make to do</h2>
+                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-trash-arrow-up" id="make-clean"></i>
+                </div>
+                <div class="task-progress">
+                    <h2 class="task-title">In Progress</h2>
+                    <i class="fa-solid fa-trash-arrow-up" id="progress-clean"></i>
+                </div>
+                <div class="task-done">
+                    <h2 class="task-title">Done</h2>
+                    <i class="fa-solid fa-trash-arrow-up" id="done-clean"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="total">
+        <div class="container">
+            <div class="total-wrap">
+                <div class="total-make">
+                    <span class="total-title">Total:</span>
+                    <div class="total-count" id="total-make-count">0</div>
+                </div>
+                <div class="total-progress">
+                    <span class="total-title">Total:</span>
+                    <div class="total-count" id="total-progress-count">0</div>
+                </div>
+                <div class="total-done">
+                    <span class="total-title">Total:</span>
+                    <div class="total-count" id="total-done-count">0</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cards">
+        <div class="container">
+            <div class="cards-wrap">
+                <div class="cards-column-make">
+                    <!-- <div class="cards-column-card">
+                        <div class="cards-head">
+                            <span class="cards-head-logo">ToDo</span>
+                            <div class="cards-head-date">30.03.2023</div>
+                        </div>
+                        <div class="cards-text">
+                            <h2 class="cards-text-title">Заголовок 1</h2>
+                            <div class="cards-text-description">
+                                <p>Здесь будет текст</p>
+                            </div>
+                        </div>
+                        <div class="cards-info">
+                            <span class="cards-info-name">Рапунцель</span>
+                            <button class="card-to_progress">In progress</button>
+                            <i class="fa-solid fa-trash card-make-delete"></i>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="cards-column-progress">
+                    <div class="cards-column-card">
+                        <div class="cards-head">
+                            <span class="cards-head-logo">ToDo</span>
+                            <div class="cards-head-date">30.03.2023</div>
+                        </div>
+                        <div class="cards-text">
+                            <h2 class="cards-text-title">Заголовок 1</h2>
+                            <div class="cards-text-description">
+                                <p>Здесь будет текст</p>
+                            </div>
+                        </div>
+                        <div class="cards-info">
+                            <span class="cards-info-name">Золушка</span>
+                            <button class="card-to_make">To Make</button>
+                            <button class="card-to_done">To Done</button>
+                            <i class="fa-solid fa-trash card-progress-delete"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards-column-done">
+                    <div class="cards-column-card">
+                        <div class="cards-head">
+                            <span class="cards-head-logo">ToDo</span>
+                            <div class="cards-head-date">30.03.2023</div>
+                        </div>
+                        <div class="cards-text">
+                            <h2 class="cards-text-title">Заголовок 1</h2>
+                            <div class="cards-text-description">
+                                <p>Здесь будет текст</p>
+                            </div>
+                        </div>
+                        <div class="cards-info">
+                            <span class="cards-info-name">Русалочка</span>
+                            <button class="card-to_progress_back">In progress</button>
+                            <i class="fa-solid fa-trash card-done-delete"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="form">
+            <form action="#" name="add-task" class="add-task">
+                <div class="form-head">
+                    <h2 class="form-head-title">Fill in all required fields</h2>
+                    <i class="fa-regular fa-circle-xmark"></i>
+                </div>
+                <div class="add-task-title">
+                    <label for="text">Title:</label>
+                    <input type="text" id="title_text" name="Title">
+                </div>
+                <div class="add-task-text">
+                    <label for="task-text">Description:</label>
+                    <textarea name="task-text" id="task_text"></textarea>
+                </div>
+                <div class="add-task-autor">
+                    <input type="text" id="task_autor" name="Autor">
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="form-create" name="form-create">Create</button>
+                    <button type="reset" class="form-cancel" name="form-cancel">Cancel</button>
+                </div>
+            </form>
+        
+    </section>
+
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

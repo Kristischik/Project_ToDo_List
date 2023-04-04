@@ -1,0 +1,67 @@
+.task {
+    padding: 25px 0 5px;
+}
+
+.task-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 -15px;
+}
+
+.task-make, .task-progress, .task-done {
+    width: 30%;
+    margin: auto;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 15px;
+}
+
+.task-title {
+    font-family: 'Open Sans';
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    color: hsl(253, 32%, 41%);
+}
+
+
+
+.card-btn {
+    width: 30px;
+    height: 30px;
+}
+
+.fa-plus {
+    font-size: 24px;
+    font-weight: 800;
+    cursor: pointer;
+    color: black;
+    transition: 0.2s;
+}
+
+.fa-plus:hover {
+font-size: 28px;
+color: hsl(35, 88%, 53%);
+}
+
+
+.fa-trash-arrow-up {
+    font-size: 24px;
+    font-weight: 800;
+    cursor: pointer;
+    color: black;
+    transition: 0.2s;
+}
+
+.fa-trash-arrow-up:hover {
+font-size: 28px;
+color: hsl(35, 88%, 53%);
+}
