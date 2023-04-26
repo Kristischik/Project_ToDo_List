@@ -19,17 +19,14 @@
 }
 
 .add-task {
-    background-color: #e7d2f7;
+    background: #f8f6fa;
     border-radius: 8px;
-    width: 800px;
     overflow: hidden;
     padding: 20px;
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0); // Центрируем и масштабируем в 0 само окно
-    background: #fff;
     width: 400px;
     padding: 25px;
     transition: 0.5s all;
@@ -46,37 +43,39 @@
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px 0;
-}
 
-.form-head::after {
-    content: '';
-    width: 100%;
-    height: 2px;
-    background-color: hsl(35, 88%, 53%);
-    display: block;
-    margin: 10px auto 10px;
-}
+    &::after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background-color: $orange;
+        display: block;
+        margin: 10px auto 10px;
+    }
 
-.form-head-title {
-    font-family: 'Open Sans';
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    color: hsl(35, 88%, 53%);
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 15px;
+    &-title {
+        font-family: 'Open Sans';
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        color: $orange;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
 }
 
 .fa-circle-xmark {
     font-size: 24px;
-    color: hsl(35, 88%, 53%);
+    color: $orange;
     cursor: pointer;
 }
 
 .add-task-title {
     display: flex;
     flex-direction: column;
+    // position: relative;
 }
 
 .add-task-text {
@@ -89,7 +88,7 @@ label {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    color: hsl(253, 32%, 41%);
+    color: $purple;
     text-align: left;
     margin-bottom: 20px;
 
@@ -97,7 +96,7 @@ label {
 
 textarea {
 
-    border: 2px solid hsl(253, 32%, 41%);
+    border: 2px solid $purple;
     border-radius: 15px;
     outline: none;
     resize: none;
@@ -110,7 +109,7 @@ textarea {
 
 #task_autor,
 #title_text {
-    border: 2px solid hsl(253, 32%, 41%);
+    border: 2px solid $purple;
     border-radius: 8px;
     width: 100%;
     font-size: 20px;
@@ -131,15 +130,21 @@ textarea {
     font-weight: 500;
     line-height: 40px;
     text-transform: capitalize;
-    color: #FFF;
-    background-color: hsl(35, 88%, 53%);
-    border: 1px solid hsl(35, 88%, 53%);
+    color: $white;
+    background-color: $orange;
+    border: 1px solid $orange;
     border-radius: 25px;
     text-align: center;
     width: 140px;
     cursor: pointer;
     transition: 0.2s;
     margin-right: 10px;
+
+    &:hover {
+        background-color: $white;
+        color: $orange;
+        transform: scale(0.9);
+    }
 }
 
 .form-cancel {
@@ -148,23 +153,45 @@ textarea {
     font-weight: 500;
     line-height: 40px;
     text-transform: capitalize;
-    color: #FFF;
-    background-color: hsl(253, 32%, 41%);
-    border: 1px solid hsl(253, 32%, 41%);
+    color: $white;
+    background-color: $purple;
+    border: 1px solid $purple;
     border-radius: 25px;
     text-align: center;
     width: 140px;
     cursor: pointer;
     transition: 0.2s;
     margin-right: 10px;
+
+    &:hover {
+        background-color: $white;
+        color: $purple;
+        transform: scale(0.9);
+    }
 }
 
-.form-create:hover {
-    background-color: #fff;
-    color: hsl(35, 88%, 53%);
+.form-control {
+    position: relative;
 }
 
-.form-cancel:hover {
-    background-color: #fff;
-    color: hsl(253, 32%, 41%);
+.form-control small {
+    font-family: 'Open Sans';
+    font-weight: 500;
+    font-size: 14px;
+    color: red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small {
+    visibility: visible;
+}
+
+.form-control.success {}
+
+.form-control.error {
+    border: 2px solid red;
+    border-radius: 10px;
 }

@@ -22,19 +22,11 @@
     margin: 0 15px;
 }
 .total-title {
-    font-family: 'Open Sans';
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: center;
-    color: hsl(253, 32%, 41%);
-    
+    @include total-description;
+    color: $purple;
 }
+
 .total-count {
-    font-family: 'Open Sans';
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 20px;
-    text-align: center;
-    color: hsl(35, 88%, 53%);
+    @include total-description;
+    color: $orange;
 }

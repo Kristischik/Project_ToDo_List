@@ -7,11 +7,14 @@
     }
 
     @import './cdn';
+    @import './variables';
+    @import './mixins';
     @import './main.scss';
     @import './task.scss';
     @import './total.scss';
     @import './cards.scss';
     @import './form.scss';
+   
 
 html {
     font-family: 'Open Sans', 'Montserrat', sans-serif;

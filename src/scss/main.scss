@@ -11,31 +11,20 @@
 }
 
 .main-logo {
-    font-family: 'Open Sans';
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 32px;
+    @include main-description;
     text-align: left;
-    color: hsl(253, 32%, 41%);
     margin: 0 15px;
 }
 
 .main-title {
-    font-family: 'Open Sans';
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 32px;
+    @include main-description;
     text-align: center;
-    color: hsl(35, 88%, 53%);
+    color:$orange;
     margin: 0 15px; 
 }
 
 .main-date {
-    font-family: 'Open Sans';
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 32px;
+    @include main-description;
     text-align: center;
-    color:  hsl(253, 32%, 41%);
     margin: 0 15px; 
 }

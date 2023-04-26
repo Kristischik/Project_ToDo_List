@@ -2,6 +2,9 @@ import { setDate, cardDate } from "./date.js";
 import { clearData } from "./clearData.js";
 import { countMake, countProgress, countDone, countTasks } from "./counter.js";
 import { renderMakeToDo, renderProgress, renderDone } from "./renders.js";
+import { deleteCardMake, deleteCardProgress, deleteCardDone } from "./delCard.js";
+import { saveMakeToLocalStor, saveProgressToLocalStor, saveDoneToLocalStor, delMakeFromLocalStor, delProgressFromLocalStor, delDoneFromLocalStor } from "./localStor.js";
+import { checkControl } from "./valid.js";
 
 setDate()
 
@@ -30,31 +33,32 @@ cancelPopup.addEventListener('click', () => {                     // Вешае�
 });
 
 document.addEventListener('click', (e) => {                        // Вешаем обработчик на весь документ
+
     if (e.target === form) {                                       // Если цель клика - фон, то:
         form.classList.remove('active');                          // Убираем активный класс с фона
         addTask.classList.remove('active');                         // И с окна
     }
+    
 });
 
 // Заполнение формы и размещение в карточку
 
-let inputTitle = addTask.elements.title_text;
-let inputAutor = addTask.elements.task_autor;
-let textareaText = document.querySelector('textarea');
-let columnMake = document.querySelector('.cards-column-make');
-let columnProgress = document.querySelector('.cards-column-progress');
-let columnDone = document.querySelector('.cards-column-done');
-
-
-
+export let inputTitle = addTask.elements.title_text;
+export let inputAutor = addTask.elements.task_autor;
+export let textareaText = document.querySelector('textarea');
+export let columnMake = document.querySelector('.cards-column-make');
+export let columnProgress = document.querySelector('.cards-column-progress');
+export let columnDone = document.querySelector('.cards-column-done');
 
 // Создаем массивы для трех колонок
-let makeToDO = JSON.parse(localStorage.getItem('make')) || [];
-showTask();
-let progress = JSON.parse(localStorage.getItem('progress')) || [];
-toProgress();
-let done = JSON.parse(localStorage.getItem('done')) || [];
-toDone();
+export let makeToDO = JSON.parse(localStorage.getItem('make')) || [];
+showTask();                                                             // вызываем задания из массива make из Local Storage в документ
+export let progress = JSON.parse(localStorage.getItem('progress')) || [];
+toProgress();                                                            // вызываем задания из массива progress из Local Storage в документ
+export let done = JSON.parse(localStorage.getItem('done')) || [];
+toDone();                                                                  // вызываем задания из массива done из Local Storage в документ
+
+
 
 // Создаем функцию-конструктор
 function CreateTaskToDo(title, text, name, date) {
@@ -62,35 +66,32 @@ function CreateTaskToDo(title, text, name, date) {
     this.text = text;
     this.name = name;
     this.date = date;
-
 }
 
 // Вешаем событие на форму по нажатию которого будут добавляться объекты
 form.addEventListener('submit', getTask);
 
-
-
-// Функция получает из инпут значения и добавляет карточку с задачей в массив make
+// Функция получает из формы значения инрутов и добавляет карточку с задачей в массив make
 function getTask(e) {
-    e.preventDefault();                                 // отменяем стандартное поведение формы
+    e.preventDefault();      // отменяем стандартное поведение формы
+   
+    checkControl();                                                       
 
     let task = new CreateTaskToDo(inputTitle.value, textareaText.value, inputAutor.value, cardDate);     // создаем новый экземпляр карточки, берем значения из инпутов
-    makeToDO.push(task);   // добавляем карточку, созданную в попап в массив
+    makeToDO.push(task);                                                           // добавляем карточку, созданную в попап в массив
 
-    localStorage.setItem('make', JSON.stringify(makeToDO));   // записываем карточку в массив в localStorage
+    localStorage.setItem('make', JSON.stringify(makeToDO));                        // записываем карточку в массив в localStorage
 
-    clearData([inputTitle, textareaText, inputAutor]);    // очищаем поля ввода
+    clearData([inputTitle, textareaText, inputAutor]);                             // очищаем поля ввода
 
-    showTask();                                           // Выводим карточку в документ
-    countTasks(makeToDO, countMake);                     // считаем сколько карточек
-
-
+    showTask();                                                                   // Выводим карточку в документ
+    countTasks(makeToDO, countMake);                                              // считаем сколько карточек
 
 }
 
 
 // Фукция выводит карточку в документ в первую колонку make
-function showTask() {
+export function showTask() {
     columnMake.innerHTML = '';
 
     makeToDO.forEach((task, idx) => {
@@ -99,142 +100,13 @@ function showTask() {
 
     countTasks(makeToDO, countMake);
 
-    // let dateCards = document.querySelectorAll('.cards-head-date');   // получаем out для даты в карточке
-    // setDateCard(dateCards);
-
-    let btnsDelete = document.querySelectorAll("#card-make_delete");  // получаем все кнопки с мусорками в созданных карточках
-    deleteCardMake(btnsDelete);                                             // передаем функции по удалению карточек кнопки-мусорки
-
-
-    console.log(btnsDelete);
-
-    let btnsToProgress = document.querySelectorAll(".card-to_progress");  // получаем все кнопки In progress в созданных карточках
-    taskToProgress(btnsToProgress);
+    let btnsDelete = document.querySelectorAll("#card-make_delete");          // получаем все кнопки с мусорками в созданных карточках
+    deleteCardMake(btnsDelete);                                               // передаем функции по удалению карточек кнопки-мусорки
+ 
+    let btnsToProgress = document.querySelectorAll(".card-to_progress");      // получаем все кнопки In progress в созданных карточках
+    taskToProgress(btnsToProgress);                                           // вызываем функцию переброса карточки в прогресс
 
 }
-
-// Очищаем массив из задач, очищаем колонку в документе и счетчик обнуляем
-let cleanMake = document.querySelector('#make-clean');
-let cleanProgress = document.querySelector('#progress-clean');
-let cleanDone = document.querySelector('#done-clean');
-
-function cleanTasks(array, column) {
-    array.forEach((element) => {                 // удаляем все элементы из массива
-        let arrElements = array.length;
-        array.splice(element, arrElements);
-    });
-    let docElements = column.children;          // удаляем все дочерние элементы из колонки документа
-    for (let task of docElements) {
-        task.remove();
-    }
-}
-
-// Функции удаляющие все из массива из документа и из локал стораж
-cleanMake.addEventListener('click', () => {         // по нажатию мусорки (верхней)
-    cleanTasks(makeToDO, columnMake);                           // очищаем массив и удаляем из документа
-    delMakeFromLocalStor();                          // очищаем массив в localStorage
-    countMake.textContent = 0;                      // обнуляем счетчик задач
-    showTask();                                     // обнуляем индексы
-});
-
-cleanProgress.addEventListener('click', () => {         // по нажатию мусорки (верхней)
-    cleanTasks(progress, columnProgress);                           // очищаем массив и удаляем из документа
-    delProgressFromLocalStor();                         // очищаем массив в localStorage
-    countProgress.textContent = 0;                      // обнуляем счетчик задач
-    toProgress();
-
-});
-
-cleanDone.addEventListener('click', () => {         // по нажатию мусорки (верхней)
-    cleanTasks(done, columnDone);                           // очищаем массив и удаляем из документа
-    delDoneFromLocalStor();                        // очищаем массив в localStorage
-    countDone.textContent = 0;                      // обнуляем счетчик задач
-    toDone();
-});
-
-// Удалить карточку из массива и из колонки документа, уменьшить счетчик по нажатию мусорки
-
-function deleteCardMake(btnsDelete) {
-    btnsDelete.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            makeToDO.forEach((task, idx) => {
-                if (e.target.closest('.cards-column-card').dataset.taskid == idx) {
-                    makeToDO.splice(idx, 1);     // удаляем из массива make карточку
-                    e.target.closest('.cards-column-card').remove();    // удаляем из верстки колонки make карточку
-                    showTask();      // пересчитываем индексы в массиве make
-                }
-            });
-            delMakeFromLocalStor();    // удаляем make из LS, перезаписываем make в LS
-            countTasks(makeToDO, countMake);
-        });
-    });
-};
-
-function deleteCardProgress(btnsDeleteProgress) {
-    btnsDeleteProgress.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            progress.forEach((task, idx) => {
-                if (e.target.closest('.cards-column-card').dataset.taskid == idx) {
-
-                    progress.splice(idx, 1);     // удаляем из массива progress карточку
-                    e.target.closest('.cards-column-card').remove();    // удаляем из верстки колонки progress карточку
-                    toProgress();     // пересчитываем индексы в массиве progress
-                }
-            });
-            delProgressFromLocalStor();    // удаляем progress из LS, перезаписываем mprogress в LS
-            countTasks(progress, countProgress);
-        });
-    });
-}
-
-function deleteCardDone(btnsDeleteDone) {
-    btnsDeleteDone.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            done.forEach((task, idx) => {
-                if (e.target.closest('.cards-column-card').dataset.taskid == idx) {
-
-                    done.splice(idx, 1);     // удаляем из массива progress карточку
-                    e.target.closest('.cards-column-card').remove();    // удаляем из верстки колонки progress карточку
-                    toDone();     // пересчитываем индексы в массиве progress
-                }
-            });
-            delDoneFromLocalStor();    // удаляем progress из LS, перезаписываем mprogress в LS
-            countTasks(done, countDone);
-        });
-    });
-}
-
-
-
-// Функция записи карточек в localStorage
-function saveMakeToLocalStor() {
-    localStorage.setItem('make', JSON.stringify(makeToDO));
-};
-
-function saveProgressToLocalStor() {
-    localStorage.setItem('progress', JSON.stringify(progress));
-};
-
-function saveDoneToLocalStor() {
-    localStorage.setItem('done', JSON.stringify(done));
-};
-
-// Функция удаления записей из localStorage
-function delMakeFromLocalStor() {
-    localStorage.removeItem('make');
-    saveMakeToLocalStor();
-};
-
-function delProgressFromLocalStor() {
-    localStorage.removeItem('progress');
-    saveProgressToLocalStor();
-};
-
-function delDoneFromLocalStor() {
-    localStorage.removeItem('done');
-    saveDoneToLocalStor();
-};
-
 
 // Функция перемещения карточки из make в progress
 function taskToProgress(btnsToProgress) {
@@ -264,7 +136,7 @@ function taskToProgress(btnsToProgress) {
 };
 
 
-function toProgress() {
+export function toProgress() {
     columnProgress.innerHTML = '';
     progress.forEach((task, idx) => {
         columnProgress.innerHTML += renderProgress(task, idx);
@@ -285,7 +157,7 @@ function toProgress() {
     taskToMake(btnsToMake);
 };
 
-
+// Функция перемещения карточки из progress в done
 function taskToDone(btnsToDone) {
     btnsToDone.forEach((btn) => {
         btn.addEventListener("click", (e) => {
@@ -312,7 +184,7 @@ function taskToDone(btnsToDone) {
 }
 
 
-function toDone() {
+export function toDone() {
     columnDone.innerHTML = '';
     done.forEach((task, idx) => {
         columnDone.innerHTML += renderDone(task, idx);
@@ -331,7 +203,7 @@ function toDone() {
 
 }
 
-
+// Функция перемещения карточки из progress в make 
 function taskToMake(btnsToMake) {
     btnsToMake.forEach((btn) => {
         btn.addEventListener("click", (e) => {
@@ -354,21 +226,22 @@ function taskToMake(btnsToMake) {
     });
 }
 
+// Функция перемещения карточки из done в progress
 function taskToProgrresBack(btnsToProgressBack) {
     btnsToProgressBack.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             done.forEach((task, idx) => {
                 if (e.target.closest('.cards-column-card').dataset.taskid == idx) {
-                    progress.push(task);     // добавляем карточку в массив done
-                    toProgress();     // пересчитываем индексы в массиве progress
-                    done.splice(idx, 1);     // удаляем из массива progress карточку
-                    e.target.closest('.cards-column-card').remove();    // удаляем из верстки колонки progress карточку
-                    toDone();   // рендер в колонку документа done
+                    progress.push(task);                  // добавляем карточку в массив progress
+                    toProgress();                         // пересчитываем индексы в массиве progress
+                    done.splice(idx, 1);                 // удаляем из массива done карточку
+                    e.target.closest('.cards-column-card').remove();    // удаляем из верстки колонки done карточку
+                    toDone();                             //пересчитываем индексы в done
                 }
             });
 
-            delDoneFromLocalStor();    // удаляем done из LS, перезаписываем в LS
-            saveProgressToLocalStor(); // записываем progress в LS
+            delDoneFromLocalStor();                    // удаляем done из LS, перезаписываем в LS
+            saveProgressToLocalStor();                 // записываем progress в LS
             countTasks(progress, countProgress);
             countTasks(done, countDone);
         });

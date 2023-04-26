@@ -1,0 +1,15 @@
+@mixin main-description {
+    font-family: 'Open Sans';
+    font-weight: 700;
+    line-height: 32px;
+    font-size: 28px;
+    color:$purple;
+}
+
+@mixin total-description {
+    font-family: 'Open Sans';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+}

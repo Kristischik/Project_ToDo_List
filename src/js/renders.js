@@ -14,13 +14,16 @@ export function renderMakeToDo(task, idx) {
       </div>
       <div class="cards-info">
           <span class="cards-info-name">${task.name}</span>
-          <button class="card-to_progress">In progress</button>
-          <i class="fa-solid fa-trash" id="card-make_delete"></i>
-       </div>
+          <div class="card-info-btns">
+            <button class="card-to_progress">In progress</button>
+            <i class="fa-solid fa-trash" id="card-make_delete"></i>
+          </div>
+     </div>
     </div>
 `;
 };
 
+// Функция рендер для массива progress
 export function renderProgress(task, idx) {
     return `
     <div class="cards-column-card" data-taskid='${idx}'>
@@ -36,14 +39,17 @@ export function renderProgress(task, idx) {
     </div>
     <div class="cards-info">
         <span class="cards-info-name">${task.name}</span>
-        <button class="card-to_make">To Make</button>
-        <button class="card-to_done">To Done</button>
-        <i class="fa-solid fa-trash" id="card-progress_delete"></i>
+        <div class="card-info-btns">
+           <button class="card-to_make">To Make</button>
+           <button class="card-to_done">To Done</button>
+           <i class="fa-solid fa-trash card-progress-delete"></i>
+        </div>
     </div>
 </div>
     `;
 };
 
+// Функция рендер для массива done
 export function renderDone(task, idx) {
     return `
     <div class="cards-column-card" data-taskid='${idx}'>
@@ -59,8 +65,10 @@ export function renderDone(task, idx) {
     </div>
     <div class="cards-info">
         <span class="cards-info-name">${task.name}</span>
-        <button class="card-to_progress_back">In progress</button>
-        <i class="fa-solid fa-trash" id="card-done_delete"></i>
+        <div class="card-info-btns">
+            <button class="card-to_progress_back">In progress</button>
+            <i class="fa-solid fa-trash" id="card-done_delete"></i>
+        </div>
     </div>
 </div>
     `;

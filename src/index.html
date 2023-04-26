@@ -96,9 +96,11 @@
                         </div>
                         <div class="cards-info">
                             <span class="cards-info-name">Золушка</span>
-                            <button class="card-to_make">To Make</button>
-                            <button class="card-to_done">To Done</button>
-                            <i class="fa-solid fa-trash card-progress-delete"></i>
+                            <div class="card-info-btns">
+                                <button class="card-to_make">To Make</button>
+                                <button class="card-to_done">To Done</button>
+                                <i class="fa-solid fa-trash card-progress-delete"></i>
+                            </div>
                         </div>
                     </div> -->
                 </div>
@@ -127,32 +129,36 @@
     </section>
 
     <section class="form">
-            <form action="#" name="add-task" class="add-task">
-                <div class="form-head">
-                    <h2 class="form-head-title">Fill in all required fields</h2>
-                    <i class="fa-regular fa-circle-xmark"></i>
-                </div>
-                <div class="add-task-title">
-                    <label for="text">Title:</label>
-                    <input type="text" id="title_text" name="Title">
-                </div>
-                <div class="add-task-text">
-                    <label for="task-text">Description:</label>
-                    <textarea name="task-text" id="task_text"></textarea>
-                </div>
-                <div class="add-task-autor">
-                    <input type="text" id="task_autor" name="Autor">
-                </div>
-                <div class="form-buttons">
-                    <button type="submit" class="form-create" name="form-create">Create</button>
-                    <button type="reset" class="form-cancel" name="form-cancel">Cancel</button>
-                </div>
-            </form>
-        
+        <form action="#" name="add-task" class="add-task">
+            <div class="form-head">
+                <h2 class="form-head-title">Fill in all required fields</h2>
+                <i class="fa-regular fa-circle-xmark"></i>
+            </div>
+            <div class="add-task-title form-control">
+                <label for="text">Title:</label>
+                <input type="text" id="title_text" name="Title" placeholder="Введите заголовок">
+                <small>Error message</small>
+            </div>
+            <div class="add-task-text form-control">
+                <label for="task-text">Description:</label>
+                <textarea name="task-text" id="task_text" placeholder="Опишите задание"></textarea>
+                <small>Error message</small>
+            </div>
+            <div class="add-task-autor form-control">
+                <input type="text" id="task_autor" name="Autor" placeholder="Укажите исполнителя">
+                <small>Error message</small>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="form-create" name="form-create">Create</button>
+                <button type="reset" class="form-cancel" name="form-cancel">Cancel</button>
+            </div>
+        </form>
+
     </section>
 
 
     <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/cleanTasks.js"></script>
 </body>
 
 </html>
